@@ -1,0 +1,18 @@
+.profile__button{
+    background:url(../../../img/button.svg);
+    width: 150px; 
+    height: 50px; 
+    border: solid 2px #ffffff; 
+    background-repeat: no-repeat;
+}
+
+@media screen and (max-width:780px){
+    .profile__button{
+      background:url(../../../img/img__plus_big.svg);
+      width:282px;  
+    }
+}
+
+.profile__button:hover{
+    opacity:0.6;
+}

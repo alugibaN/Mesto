@@ -11,11 +11,3 @@
     opacity: 0.6;
 }
 
-.element__like:active{
-    width: 22px; 
-	height: 19px; 
-	background: url(../../../img/img__like_active.svg); 
-	background-repeat: no-repeat; 
-	border: none; 
-	opacity: 1; 
-}

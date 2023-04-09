@@ -4,6 +4,11 @@
     height: 50px; 
     border: solid 2px #ffffff; 
     background-repeat: no-repeat;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: 0;
+    border-radius: 0;
 }
 
 @media screen and (max-width:780px){

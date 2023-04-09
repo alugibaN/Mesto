@@ -1,18 +1,14 @@
 .popup__close-icon{
-    background: url(../img/close_icon.svg);
-    background-repeat: no-repeat; 
+    background: url(../../../img/close_icon.svg) no-repeat;
     height:32px;
     width:32px;
     position:absolute;
     top:-35px;
     right:-35px;
+    /* transition: visibility 0s linear 0.5s,opacity 0.5s linear;  */
 }
 .popup__close-icon:hover{
     opacity: 0.6;
-}
-
-.popup__close-icon:active{
-    visibility: hidden;
 }
 
 @media screen and (max-width:600px){

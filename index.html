@@ -28,71 +28,60 @@
         <img src="img/image.jpg" alt="Жак-Ив Кусто" class="profile__avatar">
         <div class="profile__inform">
           <h1 class="profile__info_name">Жак-Ив Кусто</h1>
-          <button type="button" class="profile__info_edit-button" label="edit_button"></button>
-          <h2 class="profile__info_hobby">Исследователь океана<h2>
+          <button type="button" class="profile__info_edit-button" id = 'edit-button'></button>
+          <h2 class="profile__info_hobby">Исследователь океана</h2>
         </div>
       </div>
-      <button type="button" class="profile__button"></button>
+      <button type="button" class="profile__button" id="buttom__mesto"></button>
      </section>
-     <content class="elements">
-      <div class="element">
-        <img src="../img/img_karachaevsk.jpg" alt="Карачаевск" class="element__img">
-        <div class="element__header">
-          <h2 class="element__appellation">Карачаевск</h2>
-          <button type="button" class="element__like"></button>
-        </div>
-      </div>
-        <div class="element">
-          <img src="../img/img_albrus.jpg" alt="Гора Эльбрус" class="element__img">
-          <div class="element__header">
-            <h2 class="element__appellation">Гора Эльбрус</h2>
-            <button type="button" class="element__like"></button>           
-          </div>
-        </div>
-          <div class="element">
-            <img src="../img/img_dombai.jpg" alt="Домбай" class="element__img">
-            <div class="element__header">
-              <h2 class="element__appellation">Домбай</h2>
-              <button type="button" class="element__like"></button>           
-            </div>
-            </div>
-            <div class="element">
-              <img src="../img/img_vulkan.jpg" alt="Ключевской вулкан, Камчатка" class="element__img">
-              <div class="element__header">
-                <h2 class="element__appellation">Ключевской вулкан, Камчатка</h2>
-                <button type="button" class="element__like"></button>                
-              </div>
-            </div>
-            <div class="element">
-                <img src="../img/img_vottovaara.jpg" alt="Воттоваара, Карелия" class="element__img">
-                <div class="element__header">
-                  <h2 class="element__appellation">Воттоваара, Карелия</h2>
-                  <button type="button" class="element__like"></button>                 
-                </div>
-              </div>
-              <div class="element">
-                  <img src="../img/img_tooth.jpg" alt="Зуб дракона, Западный Саян" class="element__img">
-                  <div class="element__header">
-                    <h2 class="element__appellation">Зуб дракона, Западный Саян</h2>
-                    <button type="button" class="element__like"></button>
-                  </div>
-              </div>   
-     </content>
+     <section class="elements">
+     </section>
      <footer class="footer">
       <h2 class="footer__copyright">&copy;2023 Mesto Russia</h2>
      </footer>
-    <div class="popup popup__opened"> 
+    <div class="popup" id="popup-profile"> 
       <div class="popup__container">
-        <buttom class="popup__close-icon" type="buttom"></buttom>
+        <buttom class="popup__close-icon" type="buttom" id="close"></buttom>
         <form class="popup__form" id="form__name">
           <h2 class="popup__heading">Редактировать профиль</h2> 
           <fieldset class="popup__input"> 
             <input class="popup__item" type="text" placeholder="ИМЯ" id="name" value="Жак-Ив Кусто"> 
             <input class="popup__item" type="text" placeholder="О себе" id="description" value="Исследователь океана"> 
           </fieldset> 
-          <button class="popup__button" type="submit">Сохранить</button> 
+          <button class="popup__button" type="submit" id = "submit">Сохранить</button> 
         </form>
       </div>
-    </biv>
+    </div>
+    <div class="popup" id="popup-mesto"> 
+      <div class="popup__container">
+        <buttom class="popup__close-icon" type="buttom" id="close"></buttom>
+        <form class="popup__form" id="form__name">
+          <h2 class="popup__heading">Новое место</h2> 
+          <fieldset class="popup__input"> 
+            <input class="popup__item" type="text" placeholder='Название' id="name-mesto" value=""> 
+            <input class="popup__item" type="text" placeholder="Ссылка на картинку" id="add-mesto" value=""> 
+          </fieldset> 
+          <button class="popup__button" type="submit" id = "submitMesto">Создать</button> 
+        </form>
+      </div>
+    </div>
+    <div class="popup" id="popup-img"> 
+      <div class="popup__container_img">
+        <buttom class="popup__close-icon" type="buttom" id="close"></buttom>
+          <img class ='popup__img' alt="Mesto" src = ''>
+          <h2 class="popup__name"></h2> 
+      </div>
+    </div>
+    <template id="mesto-template">
+      <div class="element" id = 'element'>
+        <button type ='button' class="element__delet" id="delet"></button>
+          <img class="element__img" alt="mesto" src="">
+        <div class="element__header">
+          <h2 class="element__appellation"></h2>  <!--изменить на title-->
+          <button type="button" class="element__like" id="like"></button>    
+        </div>
+      </div>
+     </template> 
+  <script src="script.js"></script>
 </body>
 </html>

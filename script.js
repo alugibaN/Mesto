@@ -4,19 +4,17 @@ const imgPopup = document.querySelector('#popup-img')
 const openPopup = document.querySelector('#edit-button');
 const buttonMesto = document.querySelector('#buttom__mesto');
 const elements = document.querySelector('.elements');
-// const element = document.querySelectoraAll('.element')
+const closePopup = document.querySelectorAll('#close'); 
 const like = document.querySelectorAll('.element__like');
 const template = document.querySelector('#mesto-template').content;
 const mestoName = document.querySelector('#name-mesto');
 const mestoLink = document.querySelector('#add-mesto');
-const nameInput = document.querySelector('#name'); // данные строки name
-const hobbyInput = document.querySelector('#description'); // данные строки hobby
+const nameInput = document.querySelector('#name');
+const hobbyInput = document.querySelector('#description'); 
 const profileName = document.querySelector('.profile__info_name');
 const profileHobby = document.querySelector('.profile__info_hobby');
 const popupBigImg = document.querySelector('.popup__img')
-const elementImg = document.querySelectorAll('.element__img')
 const popupBigName = document.querySelector('.popup__name')
-const nameNeme = document.querySelectorAll('.element__appellation')
 const initialCards = [
   {
     name: 'Карачаевск',
@@ -49,6 +47,8 @@ initialCards.forEach(function(el) {    /// добавление карточек
     const content = template.querySelector('.element').cloneNode(true); 
     content.querySelector('.element__img').src = el.link;
     content.querySelector('.element__appellation').textContent = el.name; 
+    content.querySelector('.element__img').alt = el.name;
+    
     elements.append(content);
 })
 
@@ -60,7 +60,7 @@ buttonMesto.addEventListener('click', function(){
     mestoPopup.classList.add('popup__opened');
 });
 
-const closePopup = document.querySelectorAll('#close'); //закрытие форм и изображений 
+//закрытие форм и изображений 
 if(closePopup.length > 0) {
     for (let i = 0; i < closePopup.length; i++){
         const el = closePopup[i];
@@ -68,23 +68,26 @@ if(closePopup.length > 0) {
             popup.classList.remove('popup__opened');
             mestoPopup.classList.remove('popup__opened');
             imgPopup.classList.remove('popup__opened');
+            nameInput.value = profileName.textContent
+            hobbyInput.value = profileHobby.textContent
+            mestoName.value = '';
+            mestoLink.value = '';  
         })
     } 
    }
-
 
 function handleFormSubmit(evt) {  //функция добаления изменений в данные профиля 
     evt.preventDefault(); 
     profileName.textContent = nameInput.value;
     profileHobby.textContent = hobbyInput.value;
     popup.classList.remove('popup__opened');
-    nameInput.value = profileName.textContent
-    hobbyInput.value = profileHobby.textContent
+ 
 }
 
 function createCard(linkValue, nameValue) { // создание карточки с местом
     const content = template.querySelector('.element').cloneNode(true); 
-    content.querySelector('.element__img').src = linkValue ;
+    content.querySelector('.element__img').src = linkValue 
+    content.querySelector('.element__img').alt = nameValue;
     content.querySelector('.element__appellation').textContent = nameValue;
     return content 
 }
@@ -97,7 +100,7 @@ function addCard (evt){ /// добавлением карточки с мест�
 }
 
 elements.addEventListener('click', function(evt) {  // лайки которые работают
-    if (evt.target.classList.contains('element__like')){
+    if(evt.target.classList.contains('element__like')){
       evt.target.classList.toggle('element__like_active')
     }
 });
@@ -108,28 +111,18 @@ elements.addEventListener('click', function(evt){ // Не должно рабо�
     }
   })
 
-  elements.addEventListener('click', function(evt) { // Открытие большой картинки 
-    if (evt.target.classList.contains('element__img')){
+  elements.addEventListener('click', function(evt,) { // Открытие большой картинки 
+    const textt = evt.target
+    if (textt.closest('.element__img')){
       const imgSrc = evt.target.getAttribute('src');
-      const nameNe = evt.target.textContent
+      const nameNe = evt.target.alt
       popupBigImg.setAttribute('src', imgSrc)
       popupBigName.textContent = nameNe
-      // openBigPopup(popupBigName)
       imgPopup.classList.add('popup__opened')
     }
    }) 
-
-  // console.log(ele)
   
-  // function openBigPopup(el) {
-  //   nameNeme.forEach(function(){
-  //     el.textContent = nameNeme.textContent
-  //     })
-  //   }
-  
-
- 
-
+   
    popup.addEventListener('submit', handleFormSubmit); // отправка формы  изменения данных профиля
    mestoPopup.addEventListener('submit', addCard); // отправка формы для добавление карточки 
 

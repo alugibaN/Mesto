@@ -15,6 +15,7 @@ const profileName = document.querySelector('.profile__info_name');
 const profileHobby = document.querySelector('.profile__info_hobby');
 const popupBigImg = document.querySelector('.popup__img')
 const popupBigName = document.querySelector('.popup__name')
+const forms = document.querySelectorAll('.popup__form')
 const initialCards = [
   {
     name: 'Карачаевск',
@@ -72,6 +73,7 @@ if(closePopup.length > 0) {
             hobbyInput.value = profileHobby.textContent
             mestoName.value = '';
             mestoLink.value = '';  
+            
         })
     } 
    }

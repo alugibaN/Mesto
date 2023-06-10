@@ -1,0 +1,6 @@
+.popup__button_inactive{
+    background-color: white ;
+    cursor: default;
+    border:solid 1px  #e1dcdc;
+    color: #e1dcdc;
+}

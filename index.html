@@ -39,37 +39,41 @@
      <footer class="footer">
       <h2 class="footer__copyright">&copy;2023 Mesto Russia</h2>
      </footer>
-    <div class="popup" id="popup-profile"> 
+     <div class="popup" id="popup-profile"> 
       <div class="popup__container">
         <buttom class="popup__close-icon" type="buttom" id="close"></buttom>
-        <form class="popup__form" id="form__name">
+        <form class="popup__form" id="form__name" novalidate>
           <h2 class="popup__heading">Редактировать профиль</h2> 
-          <fieldset class="popup__input"> 
-            <input class="popup__item" type="text" placeholder="ИМЯ" id="name" value="Жак-Ив Кусто"> 
-            <input class="popup__item" type="text" placeholder="О себе" id="description" value="Исследователь океана"> 
+          <fieldset class="popup__input">
+            <input class="popup__item" type="text" placeholder="Имя" id="name-input" value="" minlength = '2' maxlength ='40' required> 
+            <span class='name-input-error'></span>       
+            <input class="popup__item" type="text" placeholder="О себе" id="description-input" value="" minlength = '2' maxlength ='200' required>          
+            <span class='description-input-error'></span>  
+            <button class="popup__button" type="submit" id = "submit">Сохранить</button>   
           </fieldset> 
-          <button class="popup__button" type="submit" id = "submit">Сохранить</button> 
         </form>
       </div>
     </div>
     <div class="popup" id="popup-mesto"> 
       <div class="popup__container">
         <buttom class="popup__close-icon" type="buttom" id="close"></buttom>
-        <form class="popup__form" id="form__name">
+        <form class="popup__form" id="form__mesto" novalidate>
           <h2 class="popup__heading">Новое место</h2> 
           <fieldset class="popup__input"> 
-            <input class="popup__item" type="text" placeholder='Название' id="name-mesto" value=""> 
-            <input class="popup__item" type="text" placeholder="Ссылка на картинку" id="add-mesto" value=""> 
+            <input class="popup__item" type="text" placeholder='Название' id="name-mesto-input" value="" minlength = '2' maxlength ='30' required> 
+            <span class='name-mesto-input-error'></span>  
+            <input class="popup__item" type="url" placeholder="Ссылка на картинку" id="url-mesto-input" value="" required> 
+            <span class='url-mesto-input-error'></span>     
+            <button class="popup__button" type="submit" id = "submitMesto">Создать</button>     
           </fieldset> 
-          <button class="popup__button" type="submit" id = "submitMesto">Создать</button> 
         </form>
       </div>
     </div>
     <div class="popup" id="popup-img"> 
       <div class="popup__container_img">
         <buttom class="popup__close-icon" type="buttom" id="close"></buttom>
-          <img class ='popup__img' alt="Mesto" src = ''>
-          <h2 class="popup__name"></h2> 
+        <img class ='popup__img' alt="Mesto" src = ''>
+        <h2 class="popup__name"></h2> 
       </div>
     </div>
     <template id="mesto-template">
@@ -77,7 +81,7 @@
         <button type ='button' class="element__delet" id="delet"></button>
           <img class="element__img" alt="mesto" src="">
         <div class="element__header">
-          <h2 class="element__appellation"></h2>  <!--изменить на title-->
+          <h2 class="element__appellation"></h2>  
           <button type="button" class="element__like" id="like"></button>    
         </div>
       </div>

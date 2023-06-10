@@ -1,0 +1,17 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "\u001b\u001b",
+  "main": "script.js",
+  "scripts": {
+    "build": "rd /s /q dist && webpack",
+    "dev": "webpack serve"
+  },
+  "author": "aligubaN",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.85.0",
+    "webpack-cli": "^5.1.2",
+    "webpack-dev-server": "^4.15.0"
+  }
+}

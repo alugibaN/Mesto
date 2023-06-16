@@ -3,7 +3,7 @@
     height:50px;
     background-color: #000;
     color:#fff;
-    margin:18px auto 37px;
+    margin: 25px auto 37px;
     border:none;
     font-weight: 400;
     font-size: 18px;
@@ -19,7 +19,7 @@
 @media screen and (max-width:600px){
     .popup__button{
         width:238px;
-        margin-top:15px;
+        margin-top:0px;
         margin-bottom:25px;
 
     }

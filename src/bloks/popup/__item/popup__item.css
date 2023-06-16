@@ -6,9 +6,10 @@
     border:0;
     width:358px;
     padding-bottom:13px;
-    margin:0 auto;
+    /* margin:0 auto; */
     border-bottom: 1px solid #bcbcc4;
-    margin-bottom:30px;
+    /* margin-bottom:30px; */
+    position: relative;
 }
 
 @media screen and (max-width:600px){

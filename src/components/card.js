@@ -1,5 +1,6 @@
-import { listenerKeydown, listenerclickClouse } from './modal';
-import { imgPopup, popupBigImg, popupBigName} from './index'
+
+import { imgPopup} from './index'
+import { openPopup } from './modal';
  
  function createCard(linkValue, nameValue) { // создание карточки с местом
   const template = document.querySelector('#mesto-template').content;
@@ -11,19 +12,31 @@ import { imgPopup, popupBigImg, popupBigName} from './index'
     evt.target.classList.toggle('element__like_active');
   });
   content.querySelector('.element__delet').addEventListener('click', function(evt){
-    evt.target.closest('#element').remove();
+   content.remove()
   });
   content.querySelector('.element__img').addEventListener('click', function(evt){
     const imgSrc = evt.target.getAttribute('src');
     const nameAlt = evt.target.alt;
+    const popupBigImg = document.querySelector('.popup__img');
+    const popupBigName = document.querySelector('.popup__name');
     popupBigImg.setAttribute('src', imgSrc);
     popupBigName.textContent = nameAlt;
-    imgPopup.classList.add('popup__opened');
-    listenerKeydown()
+    openPopup(imgPopup);
   });
   return content;
 }
 
 export { createCard}
 
-
+// cards ={
+//   templateElementId: '#mesto-template',
+//   clonElementTemplateSelector: '.element',
+//   templateElementImg: '.element__img',
+//   templateElementName: '.element__appellation',
+//   elementLike: '.element__like',
+//   elementLikeActive: 'element__like_active',
+//   popupBigImg: '.popup__img',
+//   popupBigName: 'popup__name',
+//   popupOpenedSelector: 
+// }
+// 

@@ -50,10 +50,24 @@ const initialCards = [
   const valid = {
     formSelector: '.popup__form',
     inputSelector: '.popup__item',
-   
     submitButtonSelector: '.popup__button',
     inactiveButtonClass: 'popup__button_inactive',
     inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__input-error_active'
+    errorClass: 'popup__input-error_active',
+    spanSelector: '.popup__input-error'
   }
-  export { initialCards, valid }
+
+// const cards ={
+//   templateElementId: '#mesto-template',
+//   clonElementTemplate: '.element',
+//   templateElementImg: '.element__img',
+//   templateElementName: '.element__appellation',
+//   elementLike: '.element__like',
+//   elementLikeActive: 'element__like_active',
+//   elementDelet: '.element__delet',
+//   popupBigImg: '.popup__img',
+//   popupBigName: '.popup__name',
+//   popupOpenedSelector: 'popup__opened'
+// }
+  
+  export { valid, initialCards }

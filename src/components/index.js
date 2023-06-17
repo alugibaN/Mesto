@@ -1,9 +1,10 @@
 import '../styles/index.css';
-import { openPopup, closePopup, listenerKeydown, closeItemPopipList } from './modal';
+import { openPopup, closePopup, closeItemPopipList} from './modal';
 import { createCard} from './card'
-import { enableValidation} from './validate';
-import { initialCards, valid  } from './utils';
-// import { urlConfig  } from './Api';
+import { enableValidation, inactiveButton, activeButton, clenerForm} from './validate';
+import { valid, initialCards } from './utils';
+// import { getUsers, getCard } from './Api';
+
 
 const popupProfile = document.querySelector('#popup-profile'); 
 const popapList = document.querySelectorAll('.popup');
@@ -12,164 +13,39 @@ const imgPopup = document.querySelector('#popup-img');
 const editButton = document.querySelector('#edit-button');
 const buttonMesto = document.querySelector('#buttom__mesto');
 const elements = document.querySelector('.elements');
-const closeButton = document.querySelectorAll('#close'); 
-const mestoName = mestoPopup.querySelector('#name-mesto-input');
-const formElement = document.querySelector('#form__mesto');
-const mestoLink = formElement.querySelector('#url-mesto-input');
-const nameInput =  document.querySelector('#name-input');
-const hobbyInput = document.querySelector('#description-input'); 
+const buttonCloseList = document.querySelectorAll('#close'); 
+const inputNameFormMesto = document.querySelector('#name-mesto-input');
+const inputLinkFormMesto = document.querySelector('#url-mesto-input');
+const inputNameFormProfile =  document.querySelector('#name-input');
+const inputHobbyFormProfile = document.querySelector('#description-input'); 
 const profileName = document.querySelector('.profile__info_name');
 const profileHobby = document.querySelector('.profile__info_hobby');
-const popupBigImg = document.querySelector('.popup__img');
-const popupBigName = document.querySelector('.popup__name');
+// const popupBigImg = document.querySelector('.popup__img');
+// const popupBigName = document.querySelector('.popup__name');
 const profileForm = document.querySelector('#form__name');
 const mestoForm = document.querySelector('#form__mesto');
-const inputList = document.querySelectorAll('.popup__item')
 const sambitMesto = document.querySelector('#submitMesto')
-const saveSambitProfile = document.querySelector('#submit')
-
-
-
-
-const urlConfig = {
-  url: "https://nomoreparties.co/v1/plus-cohort-25",
-  headers: {
-    authorization: " ff0c419c-b263-4e53-89d6-32ebce7b0b06",
-    "Content-Type": "application/json",
-  }
- 
-}
-
-function tt (){
-  return fetch('https://mesto.nomoreparties.co/v1/plus-cohort-25/users/me ', {
-  headers: {
-    // method: 'POST',
-    authorization: 'ff0c419c-b263-4e53-89d6-32ebce7b0b06',
-    'Content-Type': 'application/json; charset=UTF-8'
-  }
-})
-  .then(res => res.json())
-  .then((result) => {
-    console.log(result);
-  }); 
-}
-tt()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// fetch("https://nomoreparties.co/v1/plus-cohort-25", {
-//   headers: {
-//   authorization: "ff0c419c-b263-4e53-89d6-32ebce7b0b06"
-//   // "Content-Type": "application/json",
-//   }
-// })
-//   .then((res) =>{
-//     if (res.ok) {
-//           return res.json();
-//     }
-//     })
-//     .then((data) => { 
-//       console.log(data)
-//     })
-    // .reject(()=>{
-    //   console.log(`Ошибка: ${res.status}`)
-    // })
-
-  // } else {
-    // return Promise.reject(`Ошибка: ${res.status}`);)
-// function onResponse(res) {
-//   // if (res.ok) {
-//     return res.json();
-//   // } else {
-//     return Promise.reject(`Ошибка: ${res.status}`);
-// //   }
-// // }
-
-// function tt() {
-//  return fetch(`.${urlConfig.url}`, `.${urlConfig.headers}`)
-//  .then(res => res.json)
-//  .then(data =>{
-//   console.log(data.res)
-//   Promise.reject(`Ошибка: ${res.status}`)
-
-//  })
-// }
-
-// tt()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+const popupFormSabmitEditProfile  = document.querySelector('#submit')
+// const profileAvatar = document.querySelector('.profile__avatar')
 
 editButton.addEventListener('click', function(){ 
   openPopup(popupProfile);
-  nameInput.value = profileName.textContent
-  hobbyInput.value = profileHobby.textContent
-  listenerKeydown()
-  clearingButton(saveSambitProfile)
+  inputNameFormProfile.value = profileName.textContent
+  inputHobbyFormProfile.value = profileHobby.textContent
+  clenerForm(popupProfile, valid)
+  activeButton(popupFormSabmitEditProfile, valid)
 });
-
-
-
-
-function clearingButton (buttonSambit){
- if (buttonSambit.disabled = true) {
-    buttonSambit.classList.remove('popup__button_inactive');
-    buttonSambit.disabled = false;
-  }
-}
 
 buttonMesto.addEventListener('click', function(){
-openPopup(mestoPopup);
-mestoName.value = '';
-mestoLink.value = ''; 
-listenerKeydown()
-sambitMesto.classList.add("popup__button_inactive");
-sambitMesto.setAttribute("disabled", true);
+  openPopup(mestoPopup);
+  inputNameFormMesto.value = '';
+  inputLinkFormMesto.value = ''; 
+  clenerForm(mestoPopup, valid)
+  inactiveButton(popupFormSabmitEditProfile, valid)
 });
 
 
-closeButton.forEach(function(item){
+buttonCloseList.forEach(function(item){
   item.addEventListener('click', function(){
     closeItemPopipList(popapList)
   });
@@ -183,41 +59,169 @@ popapList.forEach((popup) => {
   });
 });
 
-initialCards.forEach(function(el) { 
-  elements.append(createCard(el.link, el.name));
-});
-
-closeButton.forEach(function(item){
-  item.addEventListener('click', function(){
-    closeItemPopipList(popapList)
-  });
-});
-
-// function vilidator(){
-  enableValidation(valid)
-// }
-
-  profileForm.addEventListener('submit', (evt) => {
-    evt.preventDefault(); 
-    profileName.textContent = nameInput.value;
-      profileHobby.textContent = hobbyInput.value;
-   closePopup(popupProfile);
-  }); 
-
-  mestoForm.addEventListener('submit', (evt) =>{
+mestoForm.addEventListener('submit', (evt) =>{
     evt.preventDefault();
-    elements.prepend(createCard(mestoLink.value, mestoName.value));
+    elements.prepend(createCard(inputLinkFormMesto.value, inputNameFormMesto.value));
     closePopup(mestoPopup)
   });
 
-  export {popapList, imgPopup, popupBigImg, popupBigName}
+initialCards.forEach(function(el) { 
+  elements.append(createCard(el.link, el.name));
+});
+  
+profileForm.addEventListener('submit', (evt) =>{
+  evt.preventDefault(); 
+  profileName.textContent = inputNameFormProfile.value;
+    profileHobby.textContent = inputHobbyFormProfile.value;
+ closePopup(popupProfile);
+}); 
+
+enableValidation(valid)
+
+console.log(profileForm.closest('.popup__opened'))
+  export {popapList, imgPopup, inputNameFormProfile, inputHobbyFormProfile}
+
+
+  // const spanList = Array.from(popupProfile.querySelectorAll('.popup__input-error'));
+  // console.log(spanList)
 
 
 
 
-///валидация при открытие 
-// поменять класс ошибки 
-//
-///
-///
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// console.log(getCard())
+
+
+// const tt = new Promise((resolve, reject)=>{
+//   resolve(getUsers())  
+// })
+// tt.then(user => {
+//   // console.log(user)
+//   profileName.textContent = user.name;
+//   profileHobby.textContent = user.about;
+//   profileAvatar.textContent = user.avatar;
+// })
+// tt.catch((error) => console.log(`Ошибка: ${error}`))
+
+
+
+
+// Promise.all([getUsers(), getCard()])
+// .then(([user, initialCards])=>{
+//   profileName.textContent = user.name;
+//   profileHobby.textContent = user.about;
+//   profileAvatar.textContent = user.avatar;
+//   initialCards.forEach((arrayElement) => {
+//     // const card = createCard(arrayElement.link, arrayElement.name);
+//     elements.append(createCard(arrayElement.link, arrayElement.name));
+//   })
+// })
+// .catch((error) => console.log(`Ошибка: ${error}`))

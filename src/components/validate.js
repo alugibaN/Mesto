@@ -10,17 +10,14 @@
   });
 };
 
-// function pp ( {formSelector, spanSelector, errorClass}) {
-//   const formList = Array.from(document.querySelectorAll(formSelector));
-//   formList.forEach(formElement => {
-// //   const spanList = Array.from(formElement.querySelectorAll(spanSelector));
-// //   spanList.forEach(span =>{
-// //   if(span.classList.contains(errorClass)){
-// //     span.textContent=''
-// //   }
-// // })
-//   })
-// }
+function clenerForm (popup,  settings) {
+  const {spanSelector, inputErrorClass} = settings;
+  const spanList = Array.from(popup.querySelectorAll(spanSelector));
+  spanList.forEach(span =>{
+    span.textContent = ''
+})
+popup.querySelectorAll(`.${inputErrorClass}`).forEach(e => e.classList.remove(inputErrorClass));
+}
 
 
 const showInputError = (formElement, inputElement, errorMessage, { inputErrorClass, errorClass }) => {
@@ -56,22 +53,21 @@ const checkInputValidity = (formElement, inputElement, settings) => {
 const setEventListeners = (formElement, settings) => {
   const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
   const submitButton = formElement.querySelector(settings.submitButtonSelector);
-
+  toggleButtonState(inputList, submitButton, settings);
   inputList.forEach(inputElement => {
     inputElement.addEventListener('input', () => {
       checkInputValidity(formElement, inputElement, settings);
       toggleButtonState(inputList, submitButton, settings);
+    
     });
   });
 };
 
 const toggleButtonState = (inputList, submitButton, { inactiveButtonClass }) => {
   if (hasInvalidInput(inputList)) {
-    submitButton.classList.add(inactiveButtonClass);
-    submitButton.disabled = true;
+    inactiveButton(submitButton, {inactiveButtonClass})
   } else {
-    submitButton.classList.remove(inactiveButtonClass);
-    submitButton.disabled = false;
+    activeButton(submitButton, {inactiveButtonClass})
   }
 };
 
@@ -81,4 +77,13 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
-export { enableValidation, toggleButtonState }
+const inactiveButton = (submitButton, {inactiveButtonClass}) => {
+  submitButton.classList.add(inactiveButtonClass);
+  submitButton.disabled = true;
+}
+const activeButton =  (submitButton, {inactiveButtonClass}) => {
+  submitButton.classList.remove(inactiveButtonClass);
+  submitButton.disabled = false;
+}
+
+export { enableValidation, checkInputValidity, activeButton, inactiveButton, clenerForm}

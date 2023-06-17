@@ -24,7 +24,7 @@ const profileHobby = document.querySelector('.profile__info_hobby');
 // const popupBigName = document.querySelector('.popup__name');
 const profileForm = document.querySelector('#form__name');
 const mestoForm = document.querySelector('#form__mesto');
-const sambitMesto = document.querySelector('#submitMesto')
+const popupFormSabmitEditMesto = document.querySelector('#submitMesto')
 const popupFormSabmitEditProfile  = document.querySelector('#submit')
 // const profileAvatar = document.querySelector('.profile__avatar')
 
@@ -41,7 +41,7 @@ buttonMesto.addEventListener('click', function(){
   inputNameFormMesto.value = '';
   inputLinkFormMesto.value = ''; 
   clenerForm(mestoPopup, valid)
-  inactiveButton(popupFormSabmitEditProfile, valid)
+  inactiveButton(popupFormSabmitEditMesto , valid)
 });
 
 

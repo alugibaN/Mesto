@@ -11,12 +11,11 @@
 };
 
 function clenerForm (popup,  settings) {
-  const {spanSelector, inputErrorClass} = settings;
-  const spanList = Array.from(popup.querySelectorAll(spanSelector));
-  spanList.forEach(span =>{
-    span.textContent = ''
-})
-popup.querySelectorAll(`.${inputErrorClass}`).forEach(e => e.classList.remove(inputErrorClass));
+  const {inputErrorClass} = settings;
+  const inputList = popup.querySelectorAll(`.${inputErrorClass}`)
+  inputList.forEach(inputElement =>{
+  hideInputError(popup, inputElement, settings )
+  })
 }
 
 

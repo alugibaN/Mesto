@@ -6,8 +6,7 @@
 }
 
 .profile__avatar:hover{
-    opacity: 0.4;
-    background:url(../../../img/bigPen.svg);
+    opacity: 0.2;
 }
 
 @media screen and (max-width:780px) {
@@ -16,3 +15,16 @@
         margin-bottom: 22px;
     }
 }
+
+
+  
+  /* .profile__avatar{
+    border-radius:200px;
+    max-width:120px;
+    aspect-ratio: 1 / 1;
+    margin-right:26px;
+  }
+  
+  .profile__avatar:hover{
+    opacity: 0.2;
+  } */

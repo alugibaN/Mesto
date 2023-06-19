@@ -56,18 +56,13 @@ const initialCards = [
     errorClass: 'popup__input-error_active',
     spanSelector: '.popup__input-error'
   }
+  function LoadingAdd ({buttonElement, text, disabled}) {
+    if (disabled) {
+      buttonElement.disabled = 'disabled'
+    } else {
+      buttonElement.disabled = false;
+    }
+    buttonElement.textContent = text
+    }
 
-// const cards ={
-//   templateElementId: '#mesto-template',
-//   clonElementTemplate: '.element',
-//   templateElementImg: '.element__img',
-//   templateElementName: '.element__appellation',
-//   elementLike: '.element__like',
-//   elementLikeActive: 'element__like_active',
-//   elementDelet: '.element__delet',
-//   popupBigImg: '.popup__img',
-//   popupBigName: '.popup__name',
-//   popupOpenedSelector: 'popup__opened'
-// }
-  
-  export { valid, initialCards }
+  export { valid, initialCards, LoadingAdd }

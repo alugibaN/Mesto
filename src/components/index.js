@@ -2,7 +2,7 @@ import '../styles/index.css';
 import { openPopup, closePopup, closeItemPopipList} from './modal';
 import { addCard} from './card'
 import { enableValidation, inactiveButton, activeButton, clenerForm} from './validate';
-import { valid } from './utils';
+import { valid, LoadingAdd } from './utils';
 import { getUsers, getCard, editPatchUser, deletePost, addPutLike, deleteLike, createCardsPost, patchAvatar } from './Api';
 
 
@@ -22,46 +22,52 @@ const inputHobbyFormProfile = document.querySelector('#description-input');
 const inputAvatar = document.querySelector('#url-avatar-input')
 const profileName = document.querySelector('.profile__info_name');
 const profileHobby = document.querySelector('.profile__info_hobby');
-// const popupBigImg = document.querySelector('.popup__img');
-// const popupBigName = document.querySelector('.popup__name');
 const profileForm = document.querySelector('#form__name');
 const mestoForm = document.querySelector('#form__mesto');
 const avatarForm =document.querySelector('#form__avatar')
 const popupFormSabmitEditMesto = document.querySelector('#submitMesto')
 const popupFormSabmitEditProfile  = document.querySelector('#submit')
-const popupFormSabmitEditAvatar = document.querySelector('#buttonEditAvatar')
+const popupFormSabmitEditAvatar = document.querySelector('#submitAvatar')
 const profileAvatar = document.querySelector('.profile__avatar')
 
-
+//открытие окнам изменени я данных профиля 
 editButton.addEventListener('click', function(){ 
   openPopup(popupProfile);
   inputNameFormProfile.value = profileName.textContent
   inputHobbyFormProfile.value = profileHobby.textContent
   clenerForm(popupProfile, valid)
   activeButton(popupFormSabmitEditProfile, valid)
+  
+
 });
 
+//открытие окна добавления карточки
 buttonMesto.addEventListener('click', function(){
   openPopup(mestoPopup);
   inputNameFormMesto.value = '';
   inputLinkFormMesto.value = ''; 
   clenerForm(mestoPopup, valid)
   inactiveButton(popupFormSabmitEditMesto , valid)
+
 });
 
+// открытие окна изменения аватарки 
 profileAvatar.addEventListener('click', function(){
   openPopup(popupAvatar)
   inputAvatar.value = ''; 
   clenerForm(popupAvatar, valid)
   inactiveButton(popupFormSabmitEditMesto , valid)
-  
+
 })
+
+//закрытие окон 
 buttonCloseList.forEach(function(item){
   item.addEventListener('click', function(){
     closeItemPopipList(popapList)
   });
 });
 
+//закрытие окна нажатием на фон 
 popapList.forEach((popup) => {
   popup.addEventListener('click', (event) => {
     if (event.target === popup) {
@@ -70,13 +76,22 @@ popapList.forEach((popup) => {
   });
 });
 
+//изменение данных 
 function editProfile (evt){
   evt.preventDefault(); 
-  profileName.textContent = inputNameFormProfile.value;
-  profileHobby.textContent = inputHobbyFormProfile.value;
-  closePopup(popupProfile);
-    return editPatchUser(inputNameFormProfile.value, inputHobbyFormProfile.value)
-};
+  LoadingAdd({ buttonElement: popupFormSabmitEditProfile, text: 'Сохраняем...', disabled: true });
+  return editPatchUser(inputNameFormProfile.value, inputHobbyFormProfile.value)
+  .then(()=>{
+    profileName.textContent = inputNameFormProfile.value;
+    profileHobby.textContent = inputHobbyFormProfile.value;
+    closePopup(popupProfile);
+  })
+  .catch((error) => console.log(`Ошибка: ${error}`))
+  .finally(() => {
+    LoadingAdd({ buttonElement: popupFormSabmitEditProfile, text: 'Сохранить', disabled: false })
+  });
+}
+
 
 profileForm.addEventListener('submit', editProfile); 
 
@@ -86,7 +101,9 @@ Promise.all([getUsers(), getCard()])
   profileName.textContent = user.name;
   profileHobby.textContent = user.about;
   profileAvatar.textContent = user.avatar;
+  profileAvatar.src = user.avatar
   initialCards.forEach((el) => {
+    // console.log(user)
     const card ={
        cardInfo: el, 
        userId: user._id, 
@@ -97,11 +114,13 @@ Promise.all([getUsers(), getCard()])
        name: el.name,
        notMyId: el.owner._id
       };
+      // console.log(el)
     addCard(elements, card)
   })
 })
 .catch((error) => console.log(`Ошибка: ${error}`))
-
+ 
+//удаление карточки 
 const handleDeleteCard = (cardId, element) => {
   deletePost(cardId).then(() => {
     element.remove();
@@ -111,7 +130,8 @@ const handleDeleteCard = (cardId, element) => {
   });
 };
 
-function  EditStatusLike (id, element, likeCounter){
+//добавления лайков 
+function  editStatusLike (id, element, likeCounter){
   if (element.classList.contains("element__like_active")) {
     deleteLike(id)
       .then((result) => {
@@ -129,65 +149,63 @@ function  EditStatusLike (id, element, likeCounter){
 }
 }
 
+// добавление карточки 
+function addPost(evt){
+  evt.preventDefault();
+  LoadingAdd({ buttonElement: popupFormSabmitEditMesto, text: 'Сохраняем...', disabled: true });
 
-
-function tt(evt){
-    evt.preventDefault();
     const obj = { link: inputLinkFormMesto.value, name: inputNameFormMesto.value }
-      return fetch('https://nomoreparties.co/v1/plus-cohort-25/cards', {
-        method: 'POST',
-        headers: {  
-          authorization: " ff0c419c-b263-4e53-89d6-32ebce7b0b06",
-          "Content-Type": "application/json",
-    },
-        body: JSON.stringify(obj)
-      })
-      .then (res => {
-    if (res.ok) {
-      return res.json();
-    } else {
-      return Promise.reject(`Ошибка: ${res.status}`);
-    }
-      })
+    return createCardsPost(obj)
       .then(data => {
-        console.log(data)
-  
-        addCard(elements, obj);
-        closePopup(mestoPopup);
+        const card = {
+          name: inputNameFormMesto.value ,
+          link: inputLinkFormMesto.value,
+          likes: data.likes,
+          user: data.owner._id,
+          cardId: data._id,
+          notMyId: data.owner._id
+        }
+      addCard(elements, card);
+      closePopup(mestoPopup);
       })
       .catch((err) => {
         console.log(err);
-       });
+      })
+      .finally(() => {
+          LoadingAdd({ buttonElement: popupFormSabmitEditMesto, text: 'Добавить', disabled: false });
+
+      }); 
     }
-          mestoForm.addEventListener('submit', tt);
+          mestoForm.addEventListener('submit', addPost);
 
-// function createAvatar(evt){
-//   evt.preventDefault();
-//   return patchAvatar(inputAvatar.value)
-//   .then (result => {
-//     console.log(result)
-//     profileAvatar.src = inputAvatar.value
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//    })
-// }
-
+ //   изменения автара 
 function createAvatar(evt) {
   evt.preventDefault();
+  LoadingAdd({ buttonElement: popupFormSabmitEditAvatar, text: 'Сохраняем...', disabled: true });
+  return patchAvatar({avatar: inputAvatar.value})
+    .then((data) => {
+      console.log(data)
+      profileAvatar.src = data.avatar
+      closePopup(popupAvatar);
+    })
+    .catch((err) => {
+      console.error(err);
+    }) 
+    .finally(() => {
+      LoadingAdd({ buttonElement: popupFormSabmitEditAvatar, text: 'Сохранить', disabled: false });
+    }); 
 
-  function callFunction(date) {
-    return patchAvatar({link: inputAvatar.value})
-      .then((date) => {
-        profileAvatar.src = date.link;
-        closePopup(popupAvatar);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-  // handleSubmit(callFunction, event)
 }
+
 avatarForm.addEventListener('submit', createAvatar)
+
 enableValidation(valid)
-export {popapList, imgPopup, inputNameFormProfile, inputHobbyFormProfile, elements, handleDeleteCard, EditStatusLike}
+
+export {popapList, imgPopup, inputNameFormProfile, inputHobbyFormProfile, elements, handleDeleteCard, editStatusLike}
+
+
+
+
+
+
+

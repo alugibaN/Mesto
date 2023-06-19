@@ -14,21 +14,23 @@ function onResponse(res) {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 }
+//Получение данных о пользователе с сервера
   function getUsers (){
     return fetch (`${urlConfig.url}/users/me`, {
         headers: urlConfig.headers
     })
     .then(onResponse)
   }
+  //получение карточек с сервера 
   function getCard () {
     return fetch (`${urlConfig.url}/cards`, {
         headers: urlConfig.headers
     })
     .then(onResponse)
   }
-
+//Изменение данных 
 function editPatchUser (nameProfile, aboutProfile) {
-  fetch(`${urlConfig.url}/users/me`, {
+  return fetch(`${urlConfig.url}/users/me`, {
     method: 'PATCH',
     headers: urlConfig.headers,
     body: JSON.stringify({
@@ -38,15 +40,7 @@ function editPatchUser (nameProfile, aboutProfile) {
   })
   .then(onResponse)
 }
-function createCardsPost (obj) {
-   fetch(`${urlConfig.url}/cards`, {
-    method: 'POST',
-    headers: urlConfig.headers,
-    body: JSON.stringify(obj)
-  })
-  .then(onResponse)
-}
-
+//Удаление карточки 
 function deletePost(cardId){
   return fetch(`${urlConfig.url}/cards/${cardId}`, {
     method: 'DELETE',
@@ -54,6 +48,7 @@ function deletePost(cardId){
   })
   .then(onResponse)
 }
+//Добавление лайков 
 function addPutLike (_id){
   return fetch(`${urlConfig.url}/cards/likes/${_id}`, {
     method: 'PUT',
@@ -61,7 +56,7 @@ function addPutLike (_id){
   })
   .then(onResponse)
 }
-
+//Удаление лайков 
   function deleteLike (_id){
     return fetch(`${urlConfig.url}/cards/likes/${_id}`, {
       method: 'DELETE',
@@ -69,15 +64,28 @@ function addPutLike (_id){
     })
     .then(onResponse)
   }
-
-function patchAvatar(obj){
+  //Добавление карточек 
+  function createCardsPost (obj) {
+    return fetch (`${urlConfig.url}/cards`, {
+     method: "POST",
+     headers: urlConfig.headers,
+     body: JSON.stringify(obj),
+   })
+     .then(onResponse)
+ }
+ 
+ // Смена аватара 
+function patchAvatar(linkAvatar){
     return fetch(`${urlConfig.url}/users/me/avatar`, {
       method: "PATCH",
       headers: urlConfig.headers,
-      body: JSON.stringify(obj),
+      body: JSON.stringify(linkAvatar),
     })
       .then(onResponse)
   };
+
+
+
 
 export { getUsers, getCard, editPatchUser, patchAvatar, createCardsPost, deletePost, addPutLike, deleteLike }
 

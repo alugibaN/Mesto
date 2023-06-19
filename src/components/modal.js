@@ -22,14 +22,6 @@ function closeItemPopipList(popup) {
   })
 }
 
-
-// function editProfile (evt){
-//   evt.preventDefault(); 
-//   profileName.textContent = inputNameFormProfile.value;
-//     profileHobby.textContent = inputHobbyFormProfile.value;
-//  closePopup(popupProfile);
-// }
-
 export {openPopup, closePopup, closeItemPopipList}
 
 

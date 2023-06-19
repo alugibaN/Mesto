@@ -23,7 +23,9 @@
     </header>
     <section class="profile">
       <div class="profile__info">
-        <img src= "<%=require('./img/image.jpg')%>" alt="Жак-Ив Кусто" class="profile__avatar">
+        <div class="profile__avatar_container">
+        <img src= "" alt="Жак-Ив Кусто" class="profile__avatar">
+        </div>
         <div class="profile__inform">
           <h1 class="profile__info_name"></h1>
           <button type="button" class="profile__info_edit-button" id = 'edit-button'></button>
@@ -97,7 +99,7 @@
             <input class="popup__item" type="url" placeholder="Ссылка на Картинку" id="url-avatar-input" value="" required> 
             <span class='popup__input-error url-avatar-input-error '></span>     
         </label>
-            <button class="popup__button" type="buttonEditAvatar" id = "submitMesto">
+            <button class="popup__button" type="buttonEditAvatar" id = "submitAvatar">
               сохранить 
             </button>     
           </fieldset> 

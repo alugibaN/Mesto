@@ -1,11 +1,10 @@
 
-import { imgPopup, removeCard, handleDeleteCard, EditStatusLike } from './index';
+import { imgPopup, removeCard, handleDeleteCard, editStatusLike } from './index';
 import { openPopup } from './modal';
 import {createCardsPost} from './Api'
  
  function createCard(obj) { // создание карточки с местом
- const {link, name} = obj
-  const{ user, likes, cardId, notMyId} = obj
+ const {link, name, user, likes, cardId, notMyId} = obj
   const template = document.querySelector('#mesto-template').content;
   const content = template.querySelector('.element').cloneNode(true); 
   const likeCounter = content.querySelector('.element__counter-value');
@@ -14,8 +13,7 @@ import {createCardsPost} from './Api'
   content.querySelector('.element__img').alt = name;
   content.querySelector('.element__appellation').textContent = name;
   content.querySelector('.element__like').addEventListener('click', function(evt){
-    EditStatusLike(cardId, like, likeCounter)
-    // evt.target.classList.toggle('element__like_active');
+    editStatusLike(cardId, like, likeCounter)
   });
   likeCounter.textContent = Array.isArray(likes) && likes.length > 0 ? likes.length : "";
   content.querySelector('.element__delet').addEventListener('click', function(evt){ 
@@ -42,24 +40,8 @@ function addCard (container, user){
   container.prepend(createCard(user))
 
 }
-
-
-
-
 export { createCard, addCard}
 
-// cards ={
-//   templateElementId: '#mesto-template',
-//   clonElementTemplateSelector: '.element',
-//   templateElementImg: '.element__img',
-//   templateElementName: '.element__appellation',
-//   elementLike: '.element__like',
-//   elementLikeActive: 'element__like_active',
-//   popupBigImg: '.popup__img',
-//   popupBigName: 'popup__name',
-//   popupOpenedSelector: 
-// }
-// 
 
 
 

@@ -16,6 +16,8 @@
 @import url(../bloks//element/__img/_opened/element__img_opened.css);
 @import url(../bloks/element/__header/element__header.css);
 @import url(../bloks/element/__appellation/element__appellation.css);
+@import url(../bloks/element/__container/element__container.css);
+@import url(../bloks/element/__counter-value/element__counter-value.css);
 @import url(../bloks/element/__like/element__like.css);
 @import url(../bloks/element/__like/_active/element__like_active.css);
 @import url(../bloks/footer/footer.css);

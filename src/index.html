@@ -25,9 +25,9 @@
       <div class="profile__info">
         <img src= "<%=require('./img/image.jpg')%>" alt="Жак-Ив Кусто" class="profile__avatar">
         <div class="profile__inform">
-          <h1 class="profile__info_name">Жак-Ив кусто</h1>
+          <h1 class="profile__info_name"></h1>
           <button type="button" class="profile__info_edit-button" id = 'edit-button'></button>
-          <h2 class="profile__info_hobby">Иследователь океана</h2>
+          <h2 class="profile__info_hobby"></h2>
         </div>
       </div>
       <button type="button" class="profile__button" id="buttom__mesto"></button>
@@ -85,6 +85,25 @@
         </form>
       </div>
     </div>
+    <div class="popup" id="popup-avatar-edit"> 
+      <div class="popup__container">
+        <buttom class="popup__close-icon" type="buttom" id="close"></buttom>
+        <form class="popup__form" id="form__avatar" novalidate>
+          <h2 class="popup__heading">
+            Обновить аватарку
+          </h2> 
+          <fieldset class="popup__input"> 
+          <label class="popup__label">
+            <input class="popup__item" type="url" placeholder="Ссылка на Картинку" id="url-avatar-input" value="" required> 
+            <span class='popup__input-error url-avatar-input-error '></span>     
+        </label>
+            <button class="popup__button" type="buttonEditAvatar" id = "submitMesto">
+              сохранить 
+            </button>     
+          </fieldset> 
+        </form>
+      </div>
+    </div>
     <div class="popup" id="popup-img"> 
       <div class="popup__container_img">
         <buttom class="popup__close-icon" type="buttom" id="close"></buttom>
@@ -94,11 +113,14 @@
     </div>
     <template id="mesto-template">
       <div class="element" id = 'element'>
-        <button type ='button' class="element__delet" id="delet"></button>
+        <button type ='button' class='element__delet' id="delet"></button>
           <img class="element__img" alt="mesto" src="">
         <div class="element__header">
-          <h2 class="element__appellation"></h2>  
-          <button type="button" class="element__like" id="like"></button>    
+          <h2 class="element__appellation"></h2> 
+          <div class = 'element__container'> 
+          <button type="button" class="element__like" id="like"></button> 
+          <div class="element__counter-value"></div>
+          </div>   
         </div>
       </div>
      </template> 

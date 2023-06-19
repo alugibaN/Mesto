@@ -5,6 +5,11 @@
     margin-right:26px;
 }
 
+.profile__avatar:hover{
+    opacity: 0.4;
+    background:url(../../../img/bigPen.svg);
+}
+
 @media screen and (max-width:780px) {
     .profile__avatar{
         margin-right: 0;

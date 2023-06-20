@@ -2,7 +2,7 @@ import '../styles/index.css';
 import { openPopup, closePopup, closeItemPopipList} from './modal';
 import { addCard} from './card'
 import { enableValidation, inactiveButton, activeButton, clenerForm} from './validate';
-import { valid, LoadingAdd } from './utils';
+import { valid, loadingAdd } from './utils';
 import { getUsers, getCard, editPatchUser, deletePost, addPutLike, deleteLike, createCardsPost, patchAvatar } from './Api';
 
 
@@ -79,16 +79,18 @@ popapList.forEach((popup) => {
 //изменение данных 
 function editProfile (evt){
   evt.preventDefault(); 
-  LoadingAdd({ buttonElement: popupFormSabmitEditProfile, text: 'Сохраняем...', disabled: true });
-  return editPatchUser(inputNameFormProfile.value, inputHobbyFormProfile.value)
-  .then(()=>{
-    profileName.textContent = inputNameFormProfile.value;
-    profileHobby.textContent = inputHobbyFormProfile.value;
+  loadingAdd({ buttonElement: popupFormSabmitEditProfile, text: 'Сохраняем...', disabled: true });
+  const profile = {name:inputNameFormProfile.value, about: inputHobbyFormProfile.value}
+  return editPatchUser(profile)
+
+  .then((data)=>{
+    profileName.textContent = data.name;
+    profileHobby.textContent = data.about;
     closePopup(popupProfile);
   })
   .catch((error) => console.log(`Ошибка: ${error}`))
   .finally(() => {
-    LoadingAdd({ buttonElement: popupFormSabmitEditProfile, text: 'Сохранить', disabled: false })
+    loadingAdd({ buttonElement: popupFormSabmitEditProfile, text: 'Сохранить', disabled: false })
   });
 }
 
@@ -152,14 +154,14 @@ function  editStatusLike (id, element, likeCounter){
 // добавление карточки 
 function addPost(evt){
   evt.preventDefault();
-  LoadingAdd({ buttonElement: popupFormSabmitEditMesto, text: 'Сохраняем...', disabled: true });
+  loadingAdd({ buttonElement: popupFormSabmitEditMesto, text: 'Сохраняем...', disabled: true });
 
     const obj = { link: inputLinkFormMesto.value, name: inputNameFormMesto.value }
     return createCardsPost(obj)
       .then(data => {
         const card = {
-          name: inputNameFormMesto.value ,
-          link: inputLinkFormMesto.value,
+          name: data.name ,
+          link: data.link,
           likes: data.likes,
           user: data.owner._id,
           cardId: data._id,
@@ -172,7 +174,7 @@ function addPost(evt){
         console.log(err);
       })
       .finally(() => {
-          LoadingAdd({ buttonElement: popupFormSabmitEditMesto, text: 'Добавить', disabled: false });
+          loadingAdd({ buttonElement: popupFormSabmitEditMesto, text: 'Добавить', disabled: false });
 
       }); 
     }
@@ -181,7 +183,7 @@ function addPost(evt){
  //   изменения автара 
 function createAvatar(evt) {
   evt.preventDefault();
-  LoadingAdd({ buttonElement: popupFormSabmitEditAvatar, text: 'Сохраняем...', disabled: true });
+  loadingAdd({ buttonElement: popupFormSabmitEditAvatar, text: 'Сохраняем...', disabled: true });
   return patchAvatar({avatar: inputAvatar.value})
     .then((data) => {
       console.log(data)
@@ -192,7 +194,7 @@ function createAvatar(evt) {
       console.error(err);
     }) 
     .finally(() => {
-      LoadingAdd({ buttonElement: popupFormSabmitEditAvatar, text: 'Сохранить', disabled: false });
+      loadingAdd({ buttonElement: popupFormSabmitEditAvatar, text: 'Сохранить', disabled: false });
     }); 
 
 }

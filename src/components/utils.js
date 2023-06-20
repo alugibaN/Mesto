@@ -56,7 +56,7 @@ const initialCards = [
     errorClass: 'popup__input-error_active',
     spanSelector: '.popup__input-error'
   }
-  function LoadingAdd ({buttonElement, text, disabled}) {
+  function loadingAdd ({buttonElement, text, disabled}) {
     if (disabled) {
       buttonElement.disabled = 'disabled'
     } else {
@@ -65,4 +65,4 @@ const initialCards = [
     buttonElement.textContent = text
     }
 
-  export { valid, initialCards, LoadingAdd }
+  export { valid, initialCards, loadingAdd }

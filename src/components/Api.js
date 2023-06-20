@@ -29,14 +29,11 @@ function onResponse(res) {
     .then(onResponse)
   }
 //Изменение данных 
-function editPatchUser (nameProfile, aboutProfile) {
+function editPatchUser (obj) {
   return fetch(`${urlConfig.url}/users/me`, {
     method: 'PATCH',
     headers: urlConfig.headers,
-    body: JSON.stringify({
-      name: nameProfile,
-      about: aboutProfile
-    })
+    body: JSON.stringify(obj)
   })
   .then(onResponse)
 }

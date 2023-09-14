@@ -70,7 +70,7 @@ buttonCloseList.forEach(function(item){
 //закрытие окна нажатием на фон 
 popapList.forEach((popup) => {
   popup.addEventListener('click', (event) => {
-    if (event.target === popup) {
+    if (c) {
       closePopup(popup);
     }
   });

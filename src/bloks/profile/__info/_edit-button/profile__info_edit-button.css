@@ -1,0 +1,19 @@
+.profile__info_edit-button{
+    background: url(../../../../img/Vector.svg);
+    width:24px;
+    height:24px;
+    border: solid 2px #ffffff; 
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.profile__info_edit-button:hover{
+    opacity: 0.6;
+}
+
+@media screen and (max-width:780px) {
+    .profile__info_edit-button{
+        width:18px;
+        height:18px; 
+    }
+}

@@ -1,0 +1,15 @@
+.profile__avatar_container{
+        border-radius:200px;
+        max-width:120px;
+        aspect-ratio: 1 / 1;
+        margin-right:26px;
+        opacity: 1;
+        background:url(../../../../img/bigPen.svg) no-repeat;        background-position: center;
+}
+
+@media screen and (max-width:780px) {
+    .profile__avatar_container{
+        margin-right: 0;
+        margin-bottom: 22px;
+    }
+}

@@ -121,9 +121,8 @@ Promise.all([getUsers(), getCard()])
     profileName.textContent = user.name;
     profileHobby.textContent = user.about;
     profileAvatar.textContent = user.avatar;
-    profileAvatar.src = user.avatar;
-    console.log(initialCards)
-    initialCards.forEach((el) => {
+    profileAvatar.src = user.avatar;    // console.log(Array.isArray(initialCards)); // Должно вернуть true
+    initialCards.map((el) => {
       const card = {
         cardInfo: el,
         userId: user._id,
@@ -132,7 +131,7 @@ Promise.all([getUsers(), getCard()])
         cardId: el._id,
         link: el.link,
         name: el.name,
-        notMyId: el.owner._id,
+        notMyId: el.owner,
       };
       addCard(elements, card);
     });

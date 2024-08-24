@@ -1,7 +1,7 @@
 const urlConfig = {
-  url: "http://localhost:3001",
+  url: "https://api.nabigula.mesto.nomorepartiesco.ru",
   headers: {
-    authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmM3ODI4OTllNWMxZTk3ZGRkMjQ4ZTkiLCJpYXQiOjE3MjQzNTExNjYsImV4cCI6MTcyNDk1NTk2Nn0.f25b3ikUVVG5UoWDU4PrTv6MFEAlESr7t0HYuqIr9SE",
+    authorization:"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NmM3NThkODgxMTE2MDg3M2ZkMTNhMzgiLCJpYXQiOjE3MjQ0ODQ4MDgsImV4cCI6MTcyNTA4OTYwOH0.FR5hKP3Sq9cnapsXSKDe4SwhREJZWpY1bZOHJkrnlBk",
     "Content-Type": "application/json",
   },
 };
@@ -42,14 +42,14 @@ async function deletePost(cardId) {
 }
 //Добавление лайков
 async function addPutLike(_id) {
-  return fetch(`${urlConfig.url}/cards/likes/${_id}`, {
+  return fetch(`${urlConfig.url}/cards/${_id}/likes`, {
     method: "PUT",
     headers: urlConfig.headers,
   }).then(onResponse);
 }
 //Удаление лайков
 async function deleteLike(_id) {
-  return fetch(`${urlConfig.url}/cards/likes/${_id}`, {
+  return fetch(`${urlConfig.url}/cards/${_id}/likes`, {
     method: "DELETE",
     headers: urlConfig.headers,
   }).then(onResponse);
